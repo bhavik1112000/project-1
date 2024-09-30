@@ -1,0 +1,32 @@
+.pagination {
+  margin: 25px 0 50px 0;
+}
+
+.pagination-bullet {
+  padding: 8px 16px;
+  background-color: rgb(197, 205, 219);
+  border: 1px solid gray;
+  margin: 5px;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: cornflowerblue;
+}
+
+.left-arrow,
+.right-arrow {
+  border: none;
+  background: none;
+  margin: 10px;
+  cursor: pointer;
+}
+
+i {
+  font-size: 24px;
+}
