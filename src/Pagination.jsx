@@ -8,7 +8,6 @@ const Pagination = ({
   productsPerPage,
 }) => {
   const [totalPages, setTotalPages] = useState([]);
-  // const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
     if (productsLength > 0) {
@@ -29,7 +28,7 @@ const Pagination = ({
   return (
     <div className="pagination">
       <button
-        disabled={activePage == 1 ? true : false}
+        disabled={activePage === 1 ? true : false}
         className="left-arrow"
         onClick={() => setActivePage((prev) => Math.max(prev - 1, 1))}
       >
@@ -39,7 +38,7 @@ const Pagination = ({
         totalPages.map((page) => (
           <span
             className={`pagination-bullet ${
-              page === activePage ? "active" : ""
+              page === activePage ? "active-btn" : ""
             }`}
             onClick={(e) => {
               setActivePage(page);
@@ -51,7 +50,11 @@ const Pagination = ({
           </span>
         ))}
       <button
-        disabled={activePage == totalPages.length ? true : false}
+        disabled={
+          activePage === totalPages.length || productsLength === 0
+            ? true
+            : false
+        }
         className="right-arrow"
         onClick={() =>
           setActivePage((prev) => Math.min(prev + 1, totalPages.length))

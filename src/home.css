@@ -1,3 +1,25 @@
 .home {
-  margin: 0 20%;
+  margin: 0;
+}
+
+.flex-container {
+  display: flex;
+  column-gap: 50px;
+}
+
+.column-1 {
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+  height: 100vh;
+  padding: 15px 10px 15px 50px;
+  /* padding-left: 50px;
+  padding-right: 10px; */
+}
+.column-2 {
+  flex: 3;
+  padding-right: 50px;
+  overflow-y: scroll;
+  overflow-y: auto;
+  height: 100vh;
 }

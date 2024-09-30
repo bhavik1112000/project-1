@@ -1,0 +1,33 @@
+.filter-name {
+  font-size: 24px;
+  margin-bottom: 3px;
+}
+.filter-type {
+  margin: 15px 0;
+  text-align: left;
+}
+.filter-item {
+  margin: 5px 0;
+
+  cursor: pointer !important;
+}
+.filter-item input,
+.filter-item label {
+  cursor: pointer;
+}
+input[type="radio"] {
+  display: none;
+}
+.active {
+  background-color: cornflowerblue;
+  border-radius: 10px;
+}
+.filter-item:hover {
+  background-color: cornflowerblue;
+  border-radius: 10px;
+}
+.filter-item label {
+  width: 100%;
+  display: block;
+  padding: 8px 16px;
+}

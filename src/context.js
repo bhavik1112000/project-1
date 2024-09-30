@@ -5,6 +5,8 @@ export const appContext = createContext();
 export const AppState = (props) => {
   const [allProducts, setAllProducts] = useState([]);
   const [text, setText] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   const getAllProducts = async () => {
     try {
@@ -19,7 +21,17 @@ export const AppState = (props) => {
 
   return (
     <appContext.Provider
-      value={{ allProducts, setAllProducts, getAllProducts, text, setText }}
+      value={{
+        allProducts,
+        setAllProducts,
+        getAllProducts,
+        text,
+        setText,
+        categories,
+        setCategories,
+        brands,
+        setBrands,
+      }}
     >
       {props.children}
     </appContext.Provider>

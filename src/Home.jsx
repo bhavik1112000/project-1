@@ -6,18 +6,22 @@ import Pagination from "./Pagination";
 import Search from "./Search";
 import Sort from "./Sort";
 import "./home.css";
+import Filters from "./Filters";
 
 const Home = () => {
   const [currentProducts, setCurrentProducts] = useState([]);
   const [activePage, setActivePage] = useState(1);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortOption, setSortOption] = useState("");
+  const [filterOption, setFilterOption] = useState("");
   const productsPerPage = 7;
 
-  const { allProducts, getAllProducts, text } = useContext(appContext);
+  const { allProducts, getAllProducts, text, categories, brands } =
+    useContext(appContext);
 
   useEffect(() => {
     getAllProducts();
+    // console.log(allProducts);
   }, []);
 
   const paginateAndSortProducts = (page) => {
@@ -28,14 +32,52 @@ const Home = () => {
       product.title.toLowerCase().includes(text.toLowerCase())
     );
 
+    if (text) setActivePage(1);
+
+    // console.log(filtered);
+
+    if (categories.includes(filterOption)) {
+      filtered = filtered.filter((product) => {
+        return product.category === filterOption;
+      });
+    } else if (brands.includes(filterOption)) {
+      filtered = filtered.filter((product) => {
+        return product.brand === filterOption;
+      });
+    } else if (sortOption === "0-499") {
+      filtered = filtered.filter((product) => {
+        return product.price > 0 && product.price < 500;
+      });
+    } else if (sortOption === "500-999") {
+      filtered = filtered.filter((product) => {
+        return product.price >= 500 && product.price < 1000;
+      });
+    } else if (sortOption === "1000-1499") {
+      filtered = filtered.filter((product) => {
+        return product.price >= 1000 && product.price < 1500;
+      });
+    } else if (sortOption === "1500-1999") {
+      filtered = filtered.filter((product) => {
+        return product.price >= 1500 && product.price < 2000;
+      });
+    } else if (sortOption === "2000+") {
+      filtered = filtered.filter((product) => {
+        return product.price >= 2000;
+      });
+    }
+
+    // console.log(filtered);
+
+    setFilteredProducts(filtered);
+
     if (sortOption === "low-to-high") {
-      filtered = filtered.sort((a, b) => a.price - b.price);
+      filtered = filteredProducts.sort((a, b) => a.price - b.price);
     } else if (sortOption === "high-to-low") {
-      filtered = filtered.sort((a, b) => b.price - a.price);
+      filtered = filteredProducts.sort((a, b) => b.price - a.price);
     } else if (sortOption === "a-z") {
-      filtered = filtered.sort();
+      filtered = filteredProducts.sort();
     } else if (sortOption === "z-a") {
-      filtered = filtered.reverse();
+      filtered = filteredProducts.reverse();
     }
 
     setFilteredProducts(filtered);
@@ -45,10 +87,16 @@ const Home = () => {
 
   useEffect(() => {
     paginateAndSortProducts(activePage);
-  }, [activePage, allProducts, text, sortOption]);
+  }, [activePage, allProducts, text, sortOption, filterOption]);
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
+    // console.log(e.target.value);
+    setActivePage(1);
+  };
+  const handleFilterChange = (e) => {
+    setFilterOption(e.target.value);
+    // console.log(e.target.value);
     setActivePage(1);
   };
 
@@ -56,20 +104,33 @@ const Home = () => {
     <>
       {allProducts.length > 0 ? (
         <div className="home">
-          <Search />
+          <div className="flex-container">
+            <div className="column-1">
+              <Filters
+                handleFilterChange={handleFilterChange}
+                filterOption={filterOption}
+              />
+            </div>
+            <div className="column-2">
+              <Search />
 
-          <Sort handleSortChange={handleSortChange} sortOption={sortOption} />
+              <Sort
+                handleSortChange={handleSortChange}
+                sortOption={sortOption}
+              />
 
-          {currentProducts.map((product) => (
-            <Card id={product.id} product={product} />
-          ))}
+              {currentProducts.map((product) => (
+                <Card id={product.id} product={product} />
+              ))}
 
-          <Pagination
-            productsLength={filteredProducts.length}
-            activePage={activePage}
-            setActivePage={setActivePage}
-            productsPerPage={productsPerPage}
-          />
+              <Pagination
+                productsLength={filteredProducts.length}
+                activePage={activePage}
+                setActivePage={setActivePage}
+                productsPerPage={productsPerPage}
+              />
+            </div>
+          </div>
         </div>
       ) : (
         <div style={{ marginTop: 50 }}>
