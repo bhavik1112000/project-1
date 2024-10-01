@@ -8,7 +8,7 @@ describe("sort menu test", () => {
   it("renders on page", () => {
     render(<App />);
 
-    setInterval(() => {
+    setTimeout(() => {
       const menu = screen.getByRole('select');
       expect(menu).toBeInTheDocument();
     }, timeoutMs);
@@ -17,7 +17,7 @@ describe("sort menu test", () => {
   it("show menu items", () => {
     render(<App />);
 
-    setInterval(() => {
+    setTimeout(() => {
       const listbox = screen.getByRole('listbox');
       userEvent.click();
       expect(listbox).toHaveValue('Select');
@@ -27,7 +27,7 @@ describe("sort menu test", () => {
   it("select menu item", () => {
     render(<App />);
 
-    setInterval(() => {
+    setTimeout(() => {
       const listbox = screen.getByRole('listbox');
       userEvent.selectOptions(listbox, ['Select', 'Price: Low to High', 'Price: High to Low', 'Name: A-Z', 'Name: Z-A']);
       expect(listbox).at(0).instance().selected;

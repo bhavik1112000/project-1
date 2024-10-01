@@ -7,7 +7,7 @@ describe("home page test", () => {
   it("renders on screen", () => {
     render(<App />);
 
-    setInterval(() => {
+    setTimeout(() => {
       const cards = screen.getByRole('list');
       expect(cards).toBeInTheDocument();
     }, timeoutMs);
@@ -18,7 +18,7 @@ describe("home page test", () => {
 
     let productsList = {};
 
-    setInterval(() => {
+    setTimeout(() => {
       fetch("https://dummyjson.com/products").then(productsArray => {
         let product = productsArray['products'];
 

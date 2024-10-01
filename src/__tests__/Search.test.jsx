@@ -8,7 +8,7 @@ describe("searchbox test", () => {
   it("renders on page", () => {
     render(<App />);
 
-    setInterval(() => {
+    setTimeout(() => {
       const searchbox = screen.getByPlaceholderText('Search...');
       expect(searchbox).toBeInTheDocument();
     }, timeoutMs);
@@ -17,7 +17,7 @@ describe("searchbox test", () => {
   it("typing keywords", () => {
     render(<App />);
 
-    setInterval(() => {
+    setTimeout(() => {
       const searchbox = screen.getByPlaceholderText('Search...');
 
       userEvent.type(searchbox, 'green');
