@@ -4,7 +4,7 @@ import "./card.css";
 const Card = ({ product }) => {
   const { title, price, id, thumbnail, category, discountPercentage } = product;
   return (
-    <div className="card-container">
+    <div className="card-container" data-testid='product'>
       <div className="card-img-container">
         <img className="card-thumbnail" src={thumbnail} alt="thumbnail" />
       </div>

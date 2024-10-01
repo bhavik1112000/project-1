@@ -38,9 +38,9 @@ const Pagination = ({
       {productsLength > 0 &&
         totalPages.map((page) => (
           <span
-            className={`pagination-bullet ${
-              page === activePage ? "active" : ""
-            }`}
+            data-testid='page-bullet'
+            className={`pagination-bullet ${page === activePage ? "active" : ""
+              }`}
             onClick={(e) => {
               setActivePage(page);
               // clickHandler(e);

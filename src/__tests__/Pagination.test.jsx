@@ -4,12 +4,12 @@ import App from '../App';
 
 const timeoutMs = 5000;
 
-describe("page indicators test", () => {
+describe("page bullets test", () => {
   it("renders on page", () => {
     render(<App />);
 
     setInterval(() => {
-      const buttons = screen.getAllByRole('button');
+      const buttons = screen.getAllByTestId('page-bullet');
       expect(buttons).toBeInTheDocument();
     }, timeoutMs);
   });
@@ -18,7 +18,7 @@ describe("page indicators test", () => {
     render(<App />);
 
     setInterval(() => {
-      const buttons = screen.getAllByRole('button');
+      const buttons = screen.getAllByTestId('page-bullet');
       userEvent.hover(buttons);
     }, timeoutMs);
   });
@@ -27,7 +27,7 @@ describe("page indicators test", () => {
     render(<App />);
 
     setInterval(() => {
-      const buttons = screen.getAllByRole('button');
+      const buttons = screen.getAllByTestId('page-bullet');
       userEvent.click(buttons);
     }, timeoutMs);
   });
