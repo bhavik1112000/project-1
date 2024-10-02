@@ -61,7 +61,11 @@ const Home = () => {
           <Sort handleSortChange={handleSortChange} sortOption={sortOption} />
 
           {currentProducts.map((product) => (
-            <Card id={product.id} product={product} />
+            <Card
+              data-testid="product-card"
+              id={product.id}
+              product={product}
+            />
           ))}
 
           <Pagination
@@ -74,6 +78,7 @@ const Home = () => {
       ) : (
         <div style={{ marginTop: 50 }}>
           <RotatingLines
+            data-testid="loading"
             visible={true}
             height="60"
             width="60"

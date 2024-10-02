@@ -31,4 +31,23 @@ describe("page bullets test", () => {
       userEvent.click(buttons);
     }, timeoutMs);
   });
+
+  it("page navigation", () => {
+    render(<App />);
+
+    setTimeout(() => {
+      const buttons = screen.getAllByTestId("page-bullet");
+      userEvent.click(buttons[1]);
+      expect(buttons[1]).toHaveStyle("background-color: #6495ed");
+    }, timeoutMs);
+  });
+
+  it("page bullets", () => {
+    render(<App />);
+
+    setTimeout(() => {
+      const buttons = screen.getAllByTestId("page-bullet");
+      expect(buttons).toBe(5);
+    }, timeoutMs);
+  });
 });

@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event';
-import App from '../App';
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import App from "../App";
 
 const timeoutMs = 5000;
 
@@ -9,7 +9,7 @@ describe("searchbox test", () => {
     render(<App />);
 
     setTimeout(() => {
-      const searchbox = screen.getByPlaceholderText('Search...');
+      const searchbox = screen.getByPlaceholderText("Search...");
       expect(searchbox).toBeInTheDocument();
     }, timeoutMs);
   });
@@ -18,10 +18,21 @@ describe("searchbox test", () => {
     render(<App />);
 
     setTimeout(() => {
-      const searchbox = screen.getByPlaceholderText('Search...');
+      const searchbox = screen.getByPlaceholderText("Search...");
 
-      userEvent.type(searchbox, 'green');
-      expect(searchbox).toHaveValue('green');
+      userEvent.type(searchbox, "green");
+      expect(searchbox).toHaveValue("green");
+    }, timeoutMs);
+  });
+
+  it("number input", () => {
+    render(<App />);
+
+    setTimeout(() => {
+      const searchbox = screen.getByPlaceholderText("Search...");
+
+      userEvent.type(searchbox, "123");
+      expect(searchbox).toHaveValue("");
     }, timeoutMs);
   });
 });
