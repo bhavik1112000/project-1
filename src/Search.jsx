@@ -13,6 +13,7 @@ const Search = () => {
   return (
     <div className="search-container">
       <input
+        data-testid="searchbar"
         className="search-input"
         placeholder="Search..."
         autoComplete="off"
