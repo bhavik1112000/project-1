@@ -1,18 +1,30 @@
 .pagination {
   margin: 25px 0 50px 0;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination-bullet {
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
   background-color: rgb(197, 205, 219);
   border: 1px solid gray;
   margin: 5px;
   border-radius: 5px;
-  width: 40px;
+  width: 50px;
   height: 40px;
   display: inline-block;
   font-size: 20px;
   cursor: pointer;
+  text-align: center;
+  display: flex; /* Change to flexbox */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center;
+}
+
+.bullet-text {
+  /* padding: 8px 16px; */
+  width: 100%;
+  margin: 0 auto;
 }
 
 .active-btn {

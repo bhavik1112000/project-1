@@ -46,7 +46,9 @@ const Pagination = ({
             }}
             key={page}
           >
-            {page}
+            <p className="bullet-text" style={{ margin: "0 auto" }}>
+              {page}
+            </p>
           </span>
         ))}
       <button

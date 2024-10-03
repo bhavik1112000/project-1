@@ -1,6 +1,11 @@
+.filters {
+  background-color: whitesmoke;
+}
+
 .filter-name {
   font-size: 24px;
   margin-bottom: 3px;
+  font-weight: 600;
 }
 .filter-type {
   margin: 15px 0;
@@ -8,6 +13,8 @@
 }
 .filter-item {
   margin: 5px 0;
+  display: flex;
+  align-items: center;
 
   cursor: pointer !important;
 }
@@ -18,12 +25,18 @@
 input[type="radio"] {
   display: none;
 }
+input[type="checkbox"] {
+  margin-left: 10px;
+  transform: scale(1.1);
+}
 .active {
-  background-color: cornflowerblue;
+  background-color: cornflowerblue !important;
   border-radius: 10px;
+  border: 2px solid #0047cc;
+  font-weight: 600;
 }
 .filter-item:hover {
-  background-color: cornflowerblue;
+  background-color: #bad2fe;
   border-radius: 10px;
 }
 .filter-item label {

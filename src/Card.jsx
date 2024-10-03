@@ -11,7 +11,7 @@ const Card = ({ product }) => {
       <div className="card-details">
         <p className="card-title">{title}</p>
         <p className="card-category">{category}</p>
-        <span className="card-price">₹{price}</span>
+        <span className="card-price">${price}</span>
         <span className="card-discountPercentage">
           {discountPercentage}% off
         </span>
