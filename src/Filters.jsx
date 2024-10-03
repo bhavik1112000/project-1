@@ -20,38 +20,19 @@ const Filters = ({
     let newBrands = [];
     let newCategories = [];
     let priceRanges = [];
-    // let x = selectedPriceRange.split("-");
-    // let min = x[0];
-    // let max = x[1];
-    // console.log(min);
+
     let [min, max] = selectedPriceRange.split("-").map(Number);
     if (selectedPriceRange === "2000+") {
       max = Infinity;
       min = 2000;
     }
-    // if (!max) max = Infinity; // Handle the case for "2000+"
 
-    // console.log(filteredProducts);
     if (allProducts.length > 0) {
       allProducts.forEach((product) => {
-        // if (!categories.includes(product.category)) {
-        //   return setCategories([...prevCategories, product.category]);
-        // }
-        // setCategories((prevCategories) => {
-        //   if (!prevCategories.includes(product.category)) {
-        //     return [...prevCategories, product.category];
-        //   }
-        //   return prevCategories;
-        // });
         if (product.category && !newCategories.includes(product.category)) {
           newCategories.push(product.category);
         }
-        // setBrands((prevBrands) => {
-        //   if (product.brand && !prevBrands.includes(product.brand)) {
-        //     return [...prevBrands, product.brand];
-        //   }
-        //   return prevBrands;
-        // });
+
         if (
           (!selectedCategory || product.category === selectedCategory) &&
           (!selectedPriceRange || (product.price >= min && product.price < max))
@@ -61,13 +42,11 @@ const Filters = ({
           }
         }
 
-        // if (product.price >= min && product.price < max)
         if (
           (!selectedCategory || product.category === selectedCategory) &&
           (selectedBrands.length === 0 ||
             selectedBrands.includes(product.brand))
         ) {
-          // Collect valid price ranges based on selected category and brands
           if (product.price >= 0 && product.price < 500) {
             priceRanges.push("0-499");
           }
@@ -141,54 +120,25 @@ const Filters = ({
             }
           });
 
-          // Remove duplicates using a Set
           priceRanges = [...new Set(priceRanges)];
         }
-
-        // if (selectedCategory === product.category) {
-        //   if (product.brand && !newBrands.includes(product.brand)) {
-        //     newBrands.push(product.brand);
-        //   }
-        // } else {
-        //   // If no category is selected, add all brands
-        //   if (product.brand && !newBrands.includes(product.brand)) {
-        //     newBrands.push(product.brand);
-        //   }
-        // }
-        // if (selectedCategory) {
-        //   const x = brands.filter(
-        //     (brand) =>
-        //       brands.includes(product.brand) &&
-        //       selectedCategory === product.category
-        //   );
-        //   console.log(x);
-        //   setBrands([...brands, x]);
-        // }
       });
       console.log(
         filteredProducts.filter((product) => {
           return product.price >= 1500 && product.price < 2000;
         }).length > 0
       );
-      // console.log(newBrands);
+
       setBrands(newBrands);
       setCategories(newCategories);
       setValidPriceRanges([...new Set(priceRanges)]);
     }
-
-    // console.log;
-    // console.log(allProducts);
   }, [filteredProducts, selectedCategory, text, selectedPriceRange]);
 
   console.log(brands);
 
-  // console.log(categories);
-
   return (
-    <div
-      className="filters"
-      // style={{ visibility: filteredProducts.length > 0 ? "visible" : "hidden" }}
-    >
+    <div className="filters">
       <div className="filters-container">
         {categories.length > 0 && (
           <div className="filter-type">
@@ -420,119 +370,6 @@ const Filters = ({
             )}
           </div>
         )}
-        {/* <div className="filter-type">
-          <p className="filter-name">Price Range</p>
-          {(filteredProducts.filter((product) => {
-            return product.price > 0 && product.price < 500;
-          }).length > 0 ||
-            (selectedCategory === "" && selectedBrands.length === 0)) && (
-            <div
-              className={`filter-item ${
-                "0-499" === selectedPriceRange ? "active" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                id="0-499"
-                name="brand"
-                value="0-499"
-                checked={"0-499" === selectedPriceRange}
-                onClick={(e) => handlePriceChange(e)}
-              />
-              <label className="filter-item-label" htmlFor="0-499">
-                $0-$499
-              </label>
-            </div>
-          )}
-          {(filteredProducts.filter((product) => {
-            return product.price >= 500 && product.price < 1000;
-          }).length > 0 ||
-            (selectedCategory === "" && selectedBrands.length === 0)) && (
-            <div
-              className={`filter-item ${
-                "500-999" === selectedPriceRange ? "active" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                id="500-999"
-                name="brand"
-                value="500-999"
-                checked={"500-999" === selectedPriceRange}
-                onClick={(e) => handlePriceChange(e)}
-              />
-              <label className="filter-item-label" htmlFor="500-999">
-                $500-$999
-              </label>
-            </div>
-          )}
-          {(filteredProducts.filter((product) => {
-            return product.price >= 1000 && product.price < 1500;
-          }).length > 0 ||
-            (selectedCategory === "" && selectedBrands.length === 0)) && (
-            <div
-              className={`filter-item ${
-                "1000-1499" === selectedPriceRange ? "active" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                id="1000-1499"
-                name="brand"
-                value="1000-1499"
-                checked={"1000-1499" === selectedPriceRange}
-                onClick={(e) => handlePriceChange(e)}
-              />
-              <label className="filter-item-label" htmlFor="1000-1499">
-                $1000-$1499
-              </label>
-            </div>
-          )}
-          {(filteredProducts.filter((product) => {
-            return product.price >= 1500 && product.price < 2000;
-          }).length > 0 ||
-            (selectedCategory === "" && selectedBrands.length === 0)) && (
-            <div
-              className={`filter-item ${
-                "1500-1999" === selectedPriceRange ? "active" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                id="1500-1999"
-                name="brand"
-                value="1500-1999"
-                checked={"1500-1999" === selectedPriceRange}
-                onClick={(e) => handlePriceChange(e)}
-              />
-              <label className="filter-item-label" htmlFor="1500-1999">
-                $1500-$1999
-              </label>
-            </div>
-          )}
-          {(filteredProducts.filter((product) => {
-            return product.price >= 2000;
-          }).length > 0 ||
-            (selectedCategory === "" && selectedBrands.length === 0)) && (
-            <div
-              className={`filter-item ${
-                "2000+" === selectedPriceRange ? "active" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                id="2000+"
-                name="brand"
-                value="2000+"
-                checked={"2000+" === selectedPriceRange}
-                onClick={(e) => handlePriceChange(e)}
-              />
-              <label className="filter-item-label" htmlFor="2000+">
-                $2000+
-              </label>
-            </div>
-          )}
-        </div> */}
       </div>
     </div>
   );

@@ -42,7 +42,6 @@ const Pagination = ({
             }`}
             onClick={(e) => {
               setActivePage(page);
-              // clickHandler(e);
             }}
             key={page}
           >

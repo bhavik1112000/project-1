@@ -13,7 +13,6 @@ const Home = () => {
   const [activePage, setActivePage] = useState(1);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [sortOption, setSortOption] = useState("");
-  const [filterOption, setFilterOption] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategory, setSelectedcategory] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
@@ -41,8 +40,6 @@ const Home = () => {
 
     if (text) setActivePage(1);
 
-    // console.log(filtered);
-
     if (categories.includes(selectedCategory)) {
       filtered = filtered.filter((product) => {
         return product.category === selectedCategory;
@@ -54,15 +51,6 @@ const Home = () => {
         selectedBrands.includes(product.brand)
       );
     }
-    // } else if (brands.includes(filterOption)) {
-    //   filtered = filtered.filter((product) => {
-    //     return product.brand === filterOption;
-    //   });
-    // } else if (filterOption.length > 0) {
-    //   filtered = filtered.filter((product) =>
-    //     filterOption.includes(product.brand)
-    //   );
-    // }
     if (selectedPriceRange === "0-499") {
       filtered = filtered.filter((product) => {
         return product.price > 0 && product.price < 500;
@@ -101,10 +89,6 @@ const Home = () => {
       });
     }
 
-    // console.log(filtered);
-
-    // setFilteredProducts(filtered);
-
     if (sortOption === "low-to-high") {
       filtered = filtered.sort((a, b) => a.price - b.price);
     } else if (sortOption === "high-to-low") {
@@ -134,28 +118,14 @@ const Home = () => {
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
-    // console.log(e.target.value);
     setActivePage(1);
   };
-  // const handleFilterChange = (e) => {
-  //   if (filterOption.includes(e.target.value)) {
-  //     // Remove brand if already selected
-  //     setFilterOption(filterOption.filter((b) => b !== e.target.value));
-  //   } else {
-  //     // Add brand to selection
-  //     setFilterOption([...filterOption, e.target.value]);
-  //   }
-  //   // setFilterOption([...filterOption, e.target.value]);
-  //   // console.log(e.target.value);
-  //   console.log(filterOption);
-  //   setActivePage(1);
-  // };
 
   const handleCategoryChange = (e) => {
     setSelectedcategory(
       selectedCategory === e.target.value ? "" : e.target.value
     );
-    // console.log(selectedCategory);
+
     setActivePage(1);
     setSelectedBrands([]);
     setSelectedPriceRange("");
@@ -166,18 +136,14 @@ const Home = () => {
       selectedPriceRange === e.target.value ? "" : e.target.value
     );
     console.log(selectedCategory);
-    // if (e.target.value === selectedPriceRange) {
-    //   setSelectedPriceRange("");
-    // }
+
     setActivePage(1);
   };
 
   const handleBrandsChange = (e) => {
     if (selectedBrands.includes(e.target.value)) {
-      // Remove brand if already selected
       setSelectedBrands(selectedBrands.filter((b) => b !== e.target.value));
     } else {
-      // Add brand to selection
       setSelectedBrands([...selectedBrands, e.target.value]);
     }
     setActivePage(1);
@@ -207,10 +173,12 @@ const Home = () => {
                 setSelectedPriceRange={setSelectedPriceRange}
               />
 
-              {filteredProducts.length>0 && <Sort
-                handleSortChange={handleSortChange}
-                sortOption={sortOption}
-              />}
+              {filteredProducts.length > 0 && (
+                <Sort
+                  handleSortChange={handleSortChange}
+                  sortOption={sortOption}
+                />
+              )}
 
               {currentProducts.length > 0 ? (
                 currentProducts.map((product) => (
@@ -220,12 +188,14 @@ const Home = () => {
                 <p className="no-item">No item to display</p>
               )}
 
-              {filteredProducts.length>0 && <Pagination
-                productsLength={filteredProducts.length}
-                activePage={activePage}
-                setActivePage={setActivePage}
-                productsPerPage={productsPerPage}
-              />}
+              {filteredProducts.length > 0 && (
+                <Pagination
+                  productsLength={filteredProducts.length}
+                  activePage={activePage}
+                  setActivePage={setActivePage}
+                  productsPerPage={productsPerPage}
+                />
+              )}
             </div>
           </div>
         </div>
